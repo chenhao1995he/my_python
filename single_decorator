@@ -1,0 +1,28 @@
+class Single(object):
+    # Create a singleton decorator
+    def __init__(self, cls):
+        # Pass into a class
+        # Add initialization properties
+        self.__cls = cls
+        self.__only = None
+
+    def __call__(self, *args, **kwargs):
+        if not self.__only:
+            # Ensure memory is opened up once
+            self.__only = self.__cls(*args, **kwargs)
+        return self.__only
+
+
+# The test code
+def main():
+    @Single
+    class A(object):
+        pass
+    a = A()
+    b = A()
+    print(id(a))
+    print(id(b))
+
+
+if __name__ == '__main__':
+    main()
