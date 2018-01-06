@@ -1,0 +1,23 @@
+class Text_one(object):
+    """Class decorator"""
+
+    def __init__(self, *args):
+        self.num = args[0]
+
+    def __call__(self, func):
+        self.func = func
+        return self.call_func
+
+    def call_func(self, *args, **kwargs):
+        print(self.num)
+        print(args[0])
+        print("Add functionality here")
+        return self.func(*args, **kwargs)
+
+
+@Text_one("holle word")
+def text(i):
+    print(i)
+
+
+text("I am Chinese")
