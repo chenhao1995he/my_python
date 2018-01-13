@@ -1,0 +1,26 @@
+import pymysql
+
+
+def main():
+    pass
+    # 获取用户输入
+    find_name = input("请输入要查询的数据:")
+    # 创建connection 连接   连接为固定格式
+    conn = pymysql.connect(host="localhost", port=3306, database="数据表名", user="root", password="密码", charset="utf8")
+
+    # 获得游标对象
+    cl1 = conn.cursor()
+    # 准备字符串
+    mysql = """select * from goods where cate_name= %s; """
+    print(mysql)
+    # 准备mysqle语句
+    cl1.execute(mysql, [find_name])
+    # 提交ｍｙｓｑｌ的语句
+    print(cl1.fetchall())
+    # 关闭
+    cl1.close()
+    conn.close()
+
+
+if __name__ == '__main__':
+    main()
